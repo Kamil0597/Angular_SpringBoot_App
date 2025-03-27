@@ -1,0 +1,64 @@
+<div>
+  <h2>Dodaj nowego czytelnika</h2>
+  <form (ngSubmit)="addReader()" #addReaderForm="ngForm">
+    <label for="name">Nazwa czytelnika:</label>
+    <input
+      id="name"
+      type="text"
+      [(ngModel)]="newReader.name"
+      name="name"
+      placeholder="Wpisz nazwę czytelnika"
+      required
+    />
+
+    <label for="borrowCount">Liczba wypożyczeń:</label>
+    <input
+      id="borrowCount"
+      type="number"
+      [(ngModel)]="newReader.borrowCount"
+      name="borrowCount"
+      placeholder="0"
+      min="0"
+      required
+    />
+
+    <label for="category">Kategoria książek:</label>
+    <select
+      id="category"
+      [(ngModel)]="newReader.bookCategoryName"
+      name="bookCategoryName"
+      required
+    >
+      <option *ngFor="let category of bookCategories" [value]="category.name">
+        {{ category.name }}
+      </option>
+    </select>
+
+    <button type="submit" [disabled]="addReaderForm.invalid">Dodaj czytelnika</button>
+  </form>
+</div>
+
+
+<div>
+  <h2>Lista czytelników</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Imię</th>
+      <th>Liczba wypożyczeń</th>
+      <th>Kategoria</th>
+      <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reader of readers">
+      <td>{{ reader.name }}</td>
+      <td>{{ reader.borrowCount }}</td>
+      <td>{{ reader.bookCategoryName }}</td>
+      <td>
+        <button (click)="deleteReader(reader.id)">Usuń</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

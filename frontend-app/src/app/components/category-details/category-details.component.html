@@ -1,0 +1,18 @@
+<div *ngIf="category">
+  <!-- Szczegóły kategorii -->
+  <h2>Szczegóły kategorii: {{ category.name }}</h2>
+  <p><strong>Popularność:</strong> {{ category.popularityScore }}</p>
+
+  <!-- Lista czytelników -->
+  <h3>Czytelnicy w tej kategorii:</h3>
+  <ul>
+    <li *ngFor="let reader of readers">
+      <strong>{{ reader.name }}</strong> - Liczba wypożyczeń: {{ reader.borrowCount }}
+      <button (click)="deleteReader(reader.id)">Usuń</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!category">
+  <p>Nie znaleziono szczegółów kategorii.</p>
+</div>

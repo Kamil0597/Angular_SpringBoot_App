@@ -1,0 +1,49 @@
+<div>
+  <h2>Lista kategorii książek</h2>
+
+  <!-- Formularz dodawania kategorii -->
+  <form (ngSubmit)="addCategory()">
+    <label for="categoryName">Nazwa kategorii:</label>
+    <input
+      id="categoryName"
+      type="text"
+      [(ngModel)]="newCategoryName"
+      name="categoryName"
+      required
+    />
+
+    <label for="popularityScore">Popularność:</label>
+    <input
+      id="popularityScore"
+      type="number"
+      [(ngModel)]="newCategoryPopularity"
+      name="popularityScore"
+      required
+    />
+
+    <button type="submit">Dodaj kategorię</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let category of bookCategories">
+      {{ category.name }} (Popularność: {{ category.popularityScore }})
+      <button (click)="deleteCategory(category.id)">Usuń</button>
+      <button (click)="navigateToEdit(category.id)">Edytuj</button>
+      <button (click)="navigateToDetails(category.id)">Szczegóły</button>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h2>Lista czytelników</h2>
+
+  <button (click)="navigateToAddReader()">Dodaj czytelnika</button>
+
+  <ul>
+    <li *ngFor="let reader of readers">
+      {{ reader.name }} (Kategoria: {{ reader.bookCategoryName }})
+      <button (click)="deleteReader(reader.id)">Usuń</button>
+      <button (click)="navigateToEditReader(reader.id)">Edytuj</button>
+    </li>
+  </ul>
+</div>

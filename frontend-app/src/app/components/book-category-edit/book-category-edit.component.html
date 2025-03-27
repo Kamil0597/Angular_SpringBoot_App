@@ -1,0 +1,26 @@
+<div *ngIf="bookCategory">
+  <h2>Edycja kategorii</h2>
+
+  <form (ngSubmit)="saveChanges()">
+    <label for="name">Nazwa:</label>
+    <input
+      id="name"
+      type="text"
+      [(ngModel)]="bookCategory.name"
+      name="name"
+      required
+    />
+
+    <label for="popularityScore">Popularność:</label>
+    <input
+      id="popularityScore"
+      type="number"
+      [(ngModel)]="bookCategory.popularityScore"
+      name="popularityScore"
+      required
+    />
+
+    <button type="submit">Zapisz</button>
+    <button type="button" (click)="router.navigate(['/categories'])">Anuluj</button>
+  </form>
+</div>

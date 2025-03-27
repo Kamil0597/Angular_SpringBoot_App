@@ -1,0 +1,34 @@
+<div *ngIf="reader">
+  <h2>Edycja czytelnika</h2>
+  <form (ngSubmit)="saveChanges()">
+    <label for="name">Imię:</label>
+    <input
+      id="name"
+      type="text"
+      [(ngModel)]="reader.name"
+      name="name"
+      required
+    />
+
+    <label for="borrowCount">Liczba wypożyczeń:</label>
+    <input
+      id="borrowCount"
+      type="number"
+      [(ngModel)]="reader.borrowCount"
+      name="borrowCount"
+      required
+    />
+
+    <label for="category">Kategoria:</label>
+    <input
+      id="category"
+      type="text"
+      [(ngModel)]="reader.bookCategoryName"
+      name="bookCategoryName"
+      required
+    />
+
+    <button type="submit">Zapisz</button>
+    <button type="button" (click)="cancel()">Anuluj</button>
+  </form>
+</div>
