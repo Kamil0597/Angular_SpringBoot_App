@@ -1,0 +1,58 @@
+### Get all categories
+GET http://localhost:8082/api/categories
+
+### Add a new book category
+POST http://localhost:8082/api/categories
+Content-Type: application/json
+
+{
+  "name": "Nowe",
+  "popularityScore": 40
+}
+
+### Get book category by ID
+GET http://localhost:8082/api/categories/1f1e671e-9d47-4f47-8edd-9c4569f89325
+
+### Update a book category by ID
+PUT http://localhost:8082/api/categories/b0eb9cd2-4796-448c-bb2f-490e766a00b6
+Content-Type: application/json
+
+{
+  "name": "NEW",
+  "popularityScore": 90
+}
+
+### Delete a book category by ID
+DELETE http://localhost:8082/api/categories/99671722-a6a8-4070-b700-472fdcc0daa1
+
+### Add a new reader
+POST http://localhost:8082/api/readers
+Content-Type: application/json
+
+{
+  "name": "koza",
+  "borrowCount": 65,
+  "bookCategoryId": "a41bee66-2705-4afa-90d2-264de5aa4706"
+}
+
+### Get all readers
+GET http://localhost:8082/api/readers
+
+### Get a reader by ID
+GET http://localhost:8082/api/readers/cec25e26-8944-4157-a26c-5082266c70a2
+
+### Update a reader by ID
+PUT http://localhost:8082/api/readers/cec25e26-8944-4157-a26c-5082266c70a2
+Content-Type: application/json
+
+{
+  "name": "inna koza",
+  "borrowCount": 10,
+  "bookCategoryId": "7da3cbc1-97fe-4ddc-9c75-1d17e27f9a68"
+}
+
+### Delete a reader by ID
+DELETE http://localhost:8082/api/readers/cec25e26-8944-4157-a26c-5082266c70a2
+
+### Get all readers by category ID
+GET http://localhost:8082/api/categories/{categoryId}/elements

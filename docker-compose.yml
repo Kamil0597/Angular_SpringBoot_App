@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: angular-frontend
+    container_name: frontend
+    ports:
+      - "8085:80" # Frontend dostępny na localhost:8085
+    networks:
+      - app-network
+
+  gateway:
+    image: gateway
+    container_name: gateway
+    ports:
+      - "8082:8082" # Gateway dostępny na localhost:8082
+    environment:
+      - API_URL=http://gateway:8082/api
+    networks:
+      - app-network
+    depends_on:
+      - reader
+      - category
+
+  reader:
+    image: reader-part
+    container_name: reader
+    ports:
+      - "8080:8080" # ReaderPart dostępny na porcie 8080 w sieci kontenerów
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:reader-part
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - app-network
+
+  category:
+    image: book-category-part
+    container_name: category
+    ports:
+      - "8081:8081" # BookCategoryPart dostępny na porcie 8081 w sieci kontenerów
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:book-category-part
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
